@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'credits_page.dart'; // Importa a página de créditos
 
 void main() {
   runApp(const MyApp());
@@ -157,97 +158,137 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("FW Smart Tool"),
-        actions: [
-          IconButton(icon: const Icon(Icons.delete), onPressed: clearHistory),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      drawer: Drawer(
         child: Column(
           children: [
-            // INPUT
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: _controller,
-                      textInputAction: TextInputAction.search,
-                      onSubmitted: (_) => convert(),
-                      decoration: const InputDecoration(
-                        labelText: "HEX ou Firmware",
-                        hintText: "0916 ou R01A09V22",
-                        border: OutlineInputBorder(),
-                      ),
+            // HEADER (mais profissional)
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              accountName: const Text("FW Smart Tool"),
+              accountEmail: const Text("Firmware Utility"),
+              currentAccountPicture: const CircleAvatar(
+                child: Icon(Icons.memory),
+              ),
+            ),
+
+            // HOME
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text("Home"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+            // CRÉDITOS
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: const Text("Sobre / Créditos"),
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const CreditsPage()),
+                );
+              },
+            ),
+
+            const Divider(),
+
+            // LIMPAR HISTÓRICO (atalho útil)
+            ListTile(
+              leading: const Icon(Icons.delete),
+              title: const Text("Limpar histórico"),
+              onTap: () {
+                Navigator.pop(context);
+                clearHistory();
+              },
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(title: const Text("FW Smart Tool")),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      labelText: "Digite o código (HEX ou FW)",
+                      border: OutlineInputBorder(),
                     ),
-                    const SizedBox(height: 10),
-                    Row(
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  ElevatedButton(
+                    onPressed: convert,
+                    child: const Text("Converter"),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  if (_result.isNotEmpty)
+                    Column(
                       children: [
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: convert,
-                            icon: const Icon(Icons.sync),
-                            label: const Text("Converter"),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Resultado ($_mode):",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.copy),
+                              onPressed: copyResult,
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 10),
-                        IconButton(
-                          onPressed: copyResult,
-                          icon: const Icon(Icons.copy),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(_result),
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-            ),
 
-            const SizedBox(height: 16),
+                  const SizedBox(height: 24),
 
-            // RESULTADO
-            Card(
-              child: ListTile(
-                title: Text(_mode.isEmpty ? "Resultado" : _mode),
-                subtitle: Text(
-                  _result.isEmpty ? "—" : _result,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // HISTÓRICO
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Histórico",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            const SizedBox(height: 8),
-
-            Expanded(
-              child: _history.isEmpty
-                  ? const Center(child: Text("Sem histórico"))
-                  : ListView.builder(
-                      itemCount: _history.length,
-                      itemBuilder: (_, i) => Card(
-                        child: ListTile(
-                          leading: const Icon(Icons.history),
-                          title: Text(_history[i]),
+                  if (_history.isNotEmpty)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Histórico:",
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                      ),
+                        const SizedBox(height: 8),
+                        ..._history.map(
+                          (e) => ListTile(title: Text(e), dense: true),
+                        ),
+                      ],
                     ),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );
