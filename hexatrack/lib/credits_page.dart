@@ -58,7 +58,7 @@ class _CreditsPageState extends State<CreditsPage> {
                     const Divider(height: 30),
 
                     const Text(
-                      "Ferramenta para conversão de Firmware e HEX, incluindo processamento de logs.",
+                      "É uma ferramenta de código aberto, gratuita e sem anúncios.",
                       textAlign: TextAlign.center,
                     ),
 
@@ -76,13 +76,14 @@ class _CreditsPageState extends State<CreditsPage> {
 
                     const ListTile(
                       leading: Icon(Icons.person),
-                      title: Text("An Jorge"),
-                      subtitle: Text("Desenvolvimento & Engenharia"),
+                      title: Text("Antonio Jorge"),
+
+                      subtitle: Text("Desenvolvimento"),
                     ),
 
                     const SizedBox(height: 10),
 
-                    const Text("© 2026", style: TextStyle(fontSize: 12)),
+                    const Text("2026", style: TextStyle(fontSize: 12)),
                   ],
                 ),
               ),
