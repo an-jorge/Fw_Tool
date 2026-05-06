@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="hexatrack"
+        android:label="FW Smart Tool"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
