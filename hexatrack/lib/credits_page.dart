@@ -1,6 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+const List<Map<String, dynamic>> changelog = [
+  {
+    "version": "1.1.0",
+    "date": "2026-05-06",
+    "changes": [
+      "Adicionado menu lateral (Drawer)",
+      "Página de créditos com versão automática",
+      "Melhoria na experiência do utilizador (UX)",
+    ],
+  },
+  {
+    "version": "1.0.0",
+    "date": "2026-05-01",
+    "changes": [
+      "Lançamento inicial",
+      "Conversão HEX ↔ Firmware",
+      "Histórico com armazenamento local",
+    ],
+  },
+];
+
 class CreditsPage extends StatefulWidget {
   const CreditsPage({super.key});
 
@@ -37,8 +58,8 @@ class _CreditsPageState extends State<CreditsPage> {
               elevation: 2,
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                child: ListView(
+                  shrinkWrap: true,
                   children: [
                     const Icon(Icons.memory, size: 60),
                     const SizedBox(height: 16),
@@ -58,9 +79,48 @@ class _CreditsPageState extends State<CreditsPage> {
                     const Divider(height: 30),
 
                     const Text(
-                      "É uma ferramenta de código aberto, gratuita e sem anúncios.",
+                      "FW Smart Tool é uma ferramenta de conversão de firmware Queclink no formato(R01AxxVxx) para o formato HEX (2 bytes), integrando à análise técnica Quatenus.",
                       textAlign: TextAlign.center,
                     ),
+
+                    const SizedBox(height: 20),
+
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Changelog",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    ...changelog.map((entry) {
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "v${entry["version"]} • ${entry["date"]}",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              const SizedBox(height: 6),
+
+                              ...List.generate(
+                                entry["changes"].length,
+                                (i) => Text("• ${entry["changes"][i]}"),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
 
                     const SizedBox(height: 20),
 
@@ -73,17 +133,17 @@ class _CreditsPageState extends State<CreditsPage> {
                     ),
 
                     const SizedBox(height: 8),
-
                     const ListTile(
                       leading: Icon(Icons.person),
                       title: Text("Antonio Jorge"),
-
                       subtitle: Text("Desenvolvimento"),
                     ),
-
                     const SizedBox(height: 10),
-
-                    const Text("2026", style: TextStyle(fontSize: 12)),
+                    const Text(
+                      "2026",
+                      style: TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
