@@ -65,7 +65,7 @@ class _CreditsPageState extends State<CreditsPage> {
                     const SizedBox(height: 16),
 
                     const Text(
-                      "FW Smart Tool",
+                      "FW Tool",
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -79,7 +79,7 @@ class _CreditsPageState extends State<CreditsPage> {
                     const Divider(height: 30),
 
                     const Text(
-                      "FW Smart Tool é uma ferramenta de conversão de firmware Queclink no formato(R01AxxVxx) para o formato HEX (2 bytes), integrando à análise técnica Quatenus.",
+                      "FW Tool is a Queclink firmware converter that changes firmware from the R01AxxVxx format to the HEX format.",
                       textAlign: TextAlign.center,
                     ),
 

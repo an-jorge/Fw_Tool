@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
               ),
-              accountName: const Text("FW Smart Tool"),
+              accountName: const Text("FW Tool"),
               accountEmail: const Text("Firmware Utility"),
               currentAccountPicture: const CircleAvatar(
                 child: Icon(Icons.memory),
@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
             // CRÉDITOS
             ListTile(
               leading: const Icon(Icons.info_outline),
-              title: const Text("Sobre / Créditos"),
+              title: const Text("About"),
               onTap: () {
                 Navigator.pop(context);
 
@@ -201,7 +201,7 @@ class _HomePageState extends State<HomePage> {
             // LIMPAR HISTÓRICO (atalho útil)
             ListTile(
               leading: const Icon(Icons.delete),
-              title: const Text("Limpar histórico"),
+              title: const Text("Clear history"),
               onTap: () {
                 Navigator.pop(context);
                 clearHistory();
@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      appBar: AppBar(title: const Text("FW Smart Tool")),
+      appBar: AppBar(title: const Text("FW Tool")),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
