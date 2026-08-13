@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.uuntu" "\0"
-            VALUE "FileDescription", "hexatrack" "\0"
+            VALUE "FileDescription", "fw_tool" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "hexatrack" "\0"
+            VALUE "InternalName", "fw_tool" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.uuntu. All rights reserved." "\0"
-            VALUE "OriginalFilename", "hexatrack.exe" "\0"
-            VALUE "ProductName", "hexatrack" "\0"
+            VALUE "OriginalFilename", "fw_tool.exe" "\0"
+            VALUE "ProductName", "fw_tool" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
