@@ -1,6 +1,6 @@
 {
-    "name": "hexatrack",
-    "short_name": "hexatrack",
+    "name": "fw_tool",
+    "short_name": "fw_tool",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
