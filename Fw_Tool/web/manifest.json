@@ -1,5 +1,5 @@
 {
-    "name": "fw_tool",
+    "name": "Firmware Tool",
     "short_name": "fw_tool",
     "start_url": ".",
     "display": "standalone",
